@@ -1,0 +1,66 @@
+{
+  "calibration": {
+    "T": 0.050000000000000266,
+    "ece_after": 0.002818292398842237,
+    "ece_before": 0.4261998818308116,
+    "fit_on": "calibration:85affa68d8521fe4ce95a87c0cdd985235b0a5cd3b333010393eb0b4311adcb0",
+    "model_sha": "6ba8126302e47e4e2615413aca94ffcf74ed6207a0c1adcad0798adf1de317c1",
+    "nll_after": 0.0028228042503358024,
+    "nll_before": 0.5555132954342643
+  },
+  "calibration_version": "d7cc9cbcafcc728291ff18b2ef2f470e45ee281788d5ecce19ea34b2f285aeaf",
+  "checkpoint_sha256": "66750c7bde6c3db08484ea52e50e4fdb02b889133484cfc58bf51bccafde84a6",
+  "checks": {
+    "accuracy": true,
+    "brier": true,
+    "brier_below_uniform": true,
+    "ece": true,
+    "full_acceptance_benchmark": false,
+    "macro_f1": true,
+    "nll_below_uniform": true,
+    "production_data_available": false
+  },
+  "loopback_http_smoke": {
+    "mean_latency_ms": 13.363191799999985,
+    "p95_latency_ms": 21.134500000000056,
+    "requests": 5
+  },
+  "metrics": {
+    "abstention_rate": 0.0,
+    "accuracy": 1.0,
+    "brier": 1.537166522301055e-05,
+    "count": 8,
+    "ece": 0.0025326603228158495,
+    "log_loss": 0.0025365118518482247,
+    "macro_f1": 1.0,
+    "per_primitive": {
+      "route": {
+        "accuracy": 1.0,
+        "count": 8
+      }
+    },
+    "uniform_brier": 0.5,
+    "uniform_log_loss": 0.6931471805599453
+  },
+  "production_data_available": false,
+  "promotable": false,
+  "promotion_blocked_reason": "Synthetic smoke rows are not eligible for release promotion.",
+  "serving_smoke": {
+    "schema_valid": true,
+    "status": 200,
+    "used_loaded_candidate": true
+  },
+  "thresholds": {
+    "accuracy": 0.85,
+    "brier": 0.25,
+    "ece": 0.05,
+    "macro_f1": 0.8
+  },
+  "training": {
+    "best_validation_brier": 0.36185366413501896,
+    "epoch": 1,
+    "path": "artifacts/smoke/run/candidate.npz",
+    "steps": 1,
+    "training_state": "artifacts/smoke/run/candidate-training-state.npz"
+  }
+}

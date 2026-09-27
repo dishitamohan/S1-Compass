@@ -1,0 +1,17 @@
+{
+  "id": "ticket-00421:urgency",
+  "state_text": "Our production account is locked and all customer checkouts are failing.",
+  "question": {
+    "id": "urgency",
+    "type": "ordinal",
+    "instructions": "Select urgency: 0 means routine; 1 means impaired service; 2 means production service unavailable."
+  },
+  "options": [
+    {"id": "0", "description": "Routine request with no service impairment."},
+    {"id": "1", "description": "Service is impaired but remains available."},
+    {"id": "2", "description": "Production service is unavailable."}
+  ],
+  "label": "2",
+  "annotator_confidence": 1,
+  "source": "adjudicated"
+}

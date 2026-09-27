@@ -1,0 +1,24 @@
+/.run/
+/logs/
+/build/
+/.venv/
+/.venv39/
+/s1_compass_decision_studio.egg-info/
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Large downloaded weights and generated training/evaluation runs are local artifacts.
+/artifacts/**
+!/artifacts/**/
+!/artifacts/**/README.md
+!/artifacts/**/*.json
+!/artifacts/**/*.svg
+!/artifacts/**/*.txt
+!/artifacts/**/*.md
+!/artifacts/**/*.py
+!/artifacts/**/fixtures/
+
+# Downloaded Qwen weights, tokenizer files, and local run artifacts stay local.
+/artifacts/qwen3-0.6b/
+/artifacts/qwen3-0.6b.parity.json

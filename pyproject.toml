@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "s1-compass-decision-studio"
+version = "0.1.0"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "jsonschema==4.23.0",
+  "mlx==0.25.2; sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "mlx-lm==0.25.3; sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "tokenizers==0.21.4",
+  "huggingface_hub==0.30.2",
+]
+
+[project.optional-dependencies]
+reference = ["transformers==4.51.3", "torch==2.6.0", "numpy==1.26.4", "safetensors==0.5.3"]
+
+[tool.setuptools.packages.find]
+include = ["s1_compass*"]

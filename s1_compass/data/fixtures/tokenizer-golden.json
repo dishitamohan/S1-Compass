@@ -1,0 +1,21 @@
+{
+  "description": "Golden Batch for the test-only whitespace tokenizer (special IDs: CLS=1, SEP=2, PAD=0; token IDs are assigned by first occurrence below).",
+  "tokens": {"Instructions:": 100, "Does": 101, "this": 102, "affect": 103, "customers?": 104, "State:": 105, "service": 106, "is": 107, "down": 108, "Option:": 109, "no": 110, "customer": 111, "impact": 112, "customers": 113, "are": 114, "affected": 115},
+  "row": {
+    "id": "golden-boolean",
+    "state_text": "service is down",
+    "question": {"id": "impact", "type": "boolean", "instructions": "Does this affect customers?"},
+    "options": [
+      {"id": "false", "description": "no customer impact"},
+      {"id": "true", "description": "customers are affected"}
+    ],
+    "label": "true",
+    "annotator_confidence": 1,
+    "source": "adjudicated"
+  },
+  "expected_input_ids": [1, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 109, 113, 114, 115, 2],
+  "expected_attention_mask": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  "expected_option_spans": [[11, 14], [15, 18]],
+  "expected_label_idx": 1,
+  "expected_option_ids": ["false", "true"]
+}

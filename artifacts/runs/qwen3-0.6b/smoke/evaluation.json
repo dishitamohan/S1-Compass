@@ -1,0 +1,67 @@
+{
+  "calibration": {
+    "T": 0.05000000000000032,
+    "ece_after": 0.004160130639705439,
+    "ece_before": 0.4297973526595962,
+    "fit_on": "calibration:85affa68d8521fe4ce95a87c0cdd985235b0a5cd3b333010393eb0b4311adcb0",
+    "model_sha": "7880980186f3fa24b9efe68c08729e5e60bb5fd4a52159ed9fb21154ddd0c816",
+    "nll_after": 0.004171559772738503,
+    "nll_before": 0.561853801456891
+  },
+  "calibration_version": "68c5090253d00d9bdfc2424f882133bc99cbb9b6478d3d9b57b34aa2d4901125",
+  "checkpoint_sha256": "b950232b229c5378ddb73a49d931d2be49e6cc11b777ff7d145c60ede9e7ab69",
+  "checks": {
+    "accuracy": true,
+    "brier": true,
+    "brier_below_uniform": true,
+    "ece": true,
+    "full_acceptance_benchmark": false,
+    "macro_f1": true,
+    "nll_below_uniform": true,
+    "production_data_available": false
+  },
+  "loopback_http_smoke": {
+    "mean_latency_ms": 18.484416799765313,
+    "p95_latency_ms": 19.49270800105296,
+    "requests": 5
+  },
+  "metrics": {
+    "abstention_rate": 0.0,
+    "accuracy": 1.0,
+    "brier": 5.158624059331817e-05,
+    "count": 8,
+    "ece": 0.004637444246273104,
+    "log_loss": 0.004650394067891172,
+    "macro_f1": 1.0,
+    "per_primitive": {
+      "route": {
+        "accuracy": 1.0,
+        "count": 8
+      }
+    },
+    "uniform_brier": 0.5,
+    "uniform_log_loss": 0.6931471805599453
+  },
+  "production_data_available": false,
+  "promotable": false,
+  "promotion_blocked_reason": "Synthetic smoke rows are not eligible for release promotion.",
+  "serving_smoke": {
+    "schema_valid": true,
+    "status": 409,
+    "used_loaded_candidate": true
+  },
+  "thresholds": {
+    "accuracy": 0.85,
+    "brier": 0.25,
+    "ece": 0.05,
+    "macro_f1": 0.8
+  },
+  "training": {
+    "best_validation_brier": 0.37786321530643674,
+    "epoch": 1,
+    "path": "artifacts/runs/qwen3-0.6b/smoke/candidate.npz",
+    "steps": 1,
+    "trainable_parameters": "LoRA rank 8, alpha 16 on q_proj and v_proj in final 4 Qwen3 layers + scalar head",
+    "training_state": "artifacts/runs/qwen3-0.6b/smoke/candidate-training-state.npz"
+  }
+}

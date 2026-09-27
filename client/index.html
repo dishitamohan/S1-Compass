@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f1ef">
+  <title>S1 Compass — Decision Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="S1 Compass home">
+        <span class="brand-mark">S<span>1</span></span>
+        <span class="brand-copy"><strong>S1 Compass</strong><small>Decision Studio</small></span>
+      </a>
+      <div class="topbar-tools">
+        <label class="endpoint-field">
+          <span class="sr-only">Model API address</span>
+          <span class="endpoint-icon" aria-hidden="true">↗</span>
+          <input id="api-url" type="url" value="http://127.0.0.1:8000" spellcheck="false" aria-label="Model API address">
+        </label>
+        <span id="connection" class="connection"><i></i><span>Checking model</span></span>
+        <div class="topbar-settings">
+          <div class="base-model-control">
+            <label for="base-model-picker">Model</label>
+            <select id="base-model-picker" disabled aria-label="Base model"><option>Loading models…</option></select>
+            <small id="model-status" aria-live="polite">Checking installed candidates</small>
+          </div>
+          <div class="confidence-control">
+            <label for="confidence-floor">Confidence review threshold</label>
+            <div class="confidence-range">
+              <span>Review below</span>
+              <input id="confidence-floor" type="range" min="50" max="99" step="1" value="75" aria-label="Confidence review threshold">
+              <output id="confidence-value" for="confidence-floor">75%</output>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-kicker"><span class="eyebrow-dot"></span> LOCAL MODEL PLAYGROUND</div>
+        <div class="hero-row">
+          <div>
+            <h1>Hey, need a<br><span>decision?</span> <span class="wave">✳</span></h1>
+            <p class="hero-subtitle">Give Compass a little context. See what the model finds.</p>
+          </div>
+          <div class="hero-note"><span class="note-icon">✦</span><span>Private by design<br><small>Requests stay on this machine</small></span></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Decision tester">
+        <div class="builder-column">
+          <section class="request-mode" aria-label="Request input mode">
+            <div class="mode-copy"><span class="step-index">INPUT MODE</span><span>Build visually or paste a JSON request.</span></div>
+            <div class="mode-switch" role="tablist" aria-label="Request input mode">
+              <button id="builder-mode" class="mode-button is-active" type="button" role="tab" aria-selected="true">Visual builder</button>
+              <button id="json-mode" class="mode-button" type="button" role="tab" aria-selected="false">JSON request</button>
+            </div>
+          </section>
+          <section id="json-editor-panel" class="panel json-editor-panel" hidden>
+            <div class="panel-heading">
+              <div><span class="step-index">JSON</span><h2>Paste a request</h2></div>
+              <span class="panel-caption">REQUEST BODY</span>
+            </div>
+            <label class="field-label" for="json-request">Decision request</label>
+            <textarea id="json-request" class="json-request" rows="14" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder='{"state_text":"Context to evaluate…","questions":[]}'>
+            </textarea>
+            <div class="json-editor-footer">
+              <p id="json-status" class="json-status" aria-live="polite">Paste a request with state_text and questions.</p>
+              <button id="apply-json" class="button button-primary" type="button"><span>Show in builder</span><span class="button-arrow">↗</span></button>
+            </div>
+          </section>
+          <section class="panel context-panel">
+            <div class="panel-heading">
+              <div><span class="step-index">01</span><h2>Set the scene</h2></div>
+              <span class="panel-caption">SHARED CONTEXT</span>
+            </div>
+            <label class="field-label" for="state-text">What should the model know?</label>
+            <textarea id="state-text" rows="5" maxlength="65536" placeholder="Paste a support ticket, customer message, or any context you want the model to reason about…">A customer reports that checkout has been unavailable for all users since this morning. The team has confirmed the payment service is returning errors.</textarea>
+            <div class="field-foot"><span>Context is sent only to your local model.</span><span id="context-count">0 characters</span></div>
+          </section>
+
+          <section class="question-section">
+            <div class="section-heading">
+              <div><span class="step-index">02</span><div><h2>Ask your questions</h2><p>Each question is scored independently against the context.</p></div></div>
+              <button id="add-question" class="button button-quiet" type="button"><span>＋</span> Add question</button>
+            </div>
+            <div id="questions" class="questions"></div>
+          </section>
+
+          <div class="run-row">
+            <div class="run-hint"><span class="keyboard-icon">⌘</span><span>Ready when you are</span></div>
+            <button id="run-decision" class="button button-primary" type="button"><span>Run decision</span><span class="button-arrow">↗</span></button>
+          </div>
+        </div>
+
+        <aside class="results-column">
+          <section id="result-card" class="result-card" aria-live="polite">
+            <div class="result-topline"><span class="result-icon">↗</span><span id="result-state" class="result-state">READY TO TEST</span><span class="result-menu">···</span></div>
+            <div id="empty-result" class="empty-result">
+              <div class="empty-orbit"><span>J</span><i>✳</i></div>
+              <h2>Your result<br>will land here.</h2>
+              <p>Run a decision to see the selected options, confidence, and full probability breakdown.</p>
+            </div>
+            <div id="result-content" class="result-content" hidden></div>
+          </section>
+
+          <section class="mini-card model-card">
+            <div class="mini-icon dark-icon">J</div>
+            <div><span class="mini-label">RUNNING LOCALLY</span><strong id="active-model-name">Loading model…</strong><small>One shared decision head</small></div>
+            <span class="model-pulse"></span>
+          </section>
+
+          <section class="mini-card policy-card">
+            <div class="mini-icon coral-icon">◎</div>
+            <div><span class="mini-label">CONFIDENCE POLICY</span><strong>Review below 75%</strong><small>Low confidence escalates</small></div>
+          </section>
+
+          <details class="request-details">
+            <summary><span>Request preview</span><span class="summary-plus">＋</span></summary>
+            <pre id="request-preview"></pre>
+          </details>
+        </aside>
+      </section>
+
+      <footer class="footer"><span>S1 COMPASS <b>·</b> DECISION STUDIO</span><span>Local decision workspace <b>↗</b></span></footer>
+    </main>
+  </div>
+  <template id="question-template">
+    <article class="question-card">
+      <div class="question-card-top">
+        <div class="question-number"><span class="question-count">01</span><span class="question-type-mark">CHOICE</span></div>
+        <button class="icon-button remove-question" type="button" title="Remove question" aria-label="Remove question">×</button>
+      </div>
+      <div class="question-fields">
+        <label class="question-id-wrap"><span>QUESTION ID</span><input class="question-id" maxlength="128" value="urgency" aria-label="Question ID"></label>
+        <label class="type-wrap"><span>ANSWER TYPE</span><select class="question-type" aria-label="Answer type"><option value="choice">Choice</option><option value="boolean">Boolean</option><option value="ordinal">Ordinal</option></select></label>
+      </div>
+      <label class="field-label instruction-label">Instructions</label>
+      <input class="instructions" maxlength="4096" value="How urgent is this issue? Choose the highest level supported by the context." placeholder="Tell the model how to decide…">
+      <div class="options-heading"><span>OPTIONS</span><button class="add-option" type="button">＋ Add option</button></div>
+      <div class="option-list"></div>
+    </article>
+  </template>
+</body>
+</html>

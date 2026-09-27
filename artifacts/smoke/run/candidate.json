@@ -1,0 +1,1 @@
+{"backbone_lock":"artifacts/modernbert-base/backbone.lock.json","best_validation_brier":0.36185366413501896,"effective_batch_size":32,"epochs":1,"manifest_sha256":"c76a56d96344f6f0b70302d604322c96ad77f055b407c6f078ab3da21c4d3b93","microbatch_size":1,"seed":17,"steps":1}
